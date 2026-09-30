@@ -1,0 +1,137 @@
+/*
+ * Button — Figma "Button" (node 370:3668).
+ * Colors, spacing and radius come from src/tokens/tokens.css.
+ * Typography and icon size have no Figma variables yet, so they are
+ * taken from the component's text style (Inter Semi Bold) as-is.
+ */
+
+.button {
+  /* Per-variant hooks, overridden below */
+  --_bg: transparent;
+  --_bg-hover: var(--_bg);
+  --_bg-active: var(--_bg-hover);
+  --_bg-disabled: var(--_bg);
+  --_fg: var(--semantic-text-primary);
+  --_fg-disabled: var(--semantic-text-disabled);
+  --_border: transparent;
+  --_border-disabled: var(--_border);
+  --_ring: var(--semantic-action-primary-default);
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--_gap);
+  /* Every variant carries a 1px border so all types share the same height */
+  padding: calc(var(--_py) - 1px) calc(var(--_px) - 1px);
+  border: 1px solid var(--_border);
+  border-radius: var(--primitives-radius-md);
+  background: var(--_bg);
+  color: var(--_fg);
+  font-family: 'Inter Variable', 'Inter', system-ui, sans-serif;
+  font-size: var(--_font-size);
+  font-weight: 600;
+  line-height: var(--_line-height);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--_bg-hover);
+}
+
+.button:active:not(:disabled) {
+  background: var(--_bg-active);
+}
+
+.button:focus-visible {
+  /* Transparent outline keeps the ring visible in forced-colors mode */
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--_ring) 32%, transparent);
+}
+
+.button:disabled {
+  background: var(--_bg-disabled);
+  color: var(--_fg-disabled);
+  border-color: var(--_border-disabled);
+  cursor: not-allowed;
+}
+
+/* Sizes */
+
+.sm {
+  --_py: var(--primitives-space-8);
+  --_px: var(--primitives-space-12);
+  --_gap: var(--primitives-space-6);
+  --_font-size: 13px;
+  --_line-height: 20px;
+}
+
+.md {
+  --_py: var(--primitives-space-12);
+  --_px: var(--primitives-space-16);
+  --_gap: var(--primitives-space-8);
+  --_font-size: 14px;
+  --_line-height: 20px;
+}
+
+.lg {
+  --_py: var(--primitives-space-12);
+  --_px: var(--primitives-space-20);
+  --_gap: var(--primitives-space-8);
+  --_font-size: 16px;
+  --_line-height: 24px;
+}
+
+/* Types */
+
+.primary {
+  --_bg: var(--component-button-primary-bg-default);
+  --_bg-hover: var(--component-button-primary-bg-hover);
+  --_bg-active: var(--component-button-primary-bg-active);
+  --_bg-disabled: var(--component-button-primary-bg-disabled);
+  --_fg: var(--component-button-primary-text-default);
+  --_fg-disabled: var(--component-button-primary-text-disabled);
+}
+
+.secondary {
+  --_bg: var(--component-button-secondary-bg-default);
+  --_bg-hover: var(--component-button-secondary-bg-hover);
+  --_bg-active: var(--component-button-secondary-bg-active);
+  --_fg: var(--component-button-secondary-text);
+  --_border: var(--component-button-secondary-border);
+  --_border-disabled: var(--semantic-border-subtle);
+}
+
+.ghost {
+  --_bg-hover: var(--component-button-ghost-bg-hover);
+  /* No component token for ghost pressed in Figma — uses the semantic one directly */
+  --_bg-active: var(--semantic-action-secondary-active);
+  --_bg-disabled: transparent;
+  --_fg: var(--component-button-ghost-text);
+}
+
+.danger {
+  --_bg: var(--component-button-danger-bg-default);
+  --_bg-hover: var(--component-button-danger-bg-hover);
+  --_bg-active: var(--component-button-danger-bg-active);
+  --_bg-disabled: var(--component-button-primary-bg-disabled);
+  --_fg: var(--component-button-danger-text);
+  --_ring: var(--semantic-action-danger-default);
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.icon > svg {
+  width: 100%;
+  height: 100%;
+}
